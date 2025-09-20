@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRUDHSAARTHI - Senior Wellness Companion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-light: #e8f0fe;
+            --secondary: #f8f9fa;
+            --text: #202124;
+            --text-light: #5f6368;
+            --background: #ffffff;
+            --card-bg: #f8f9fa;
+            --accent: #ff5722;
+            --success: #0f9d58;
+            --warning: #f4b400;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+        }
+
+        .dark-theme {
+            --primary: #8ab4f8;
+            --primary-light: #1c3a5c;
+            --secondary: #202124;
+            --text: #e8eaed;
+            --text-light: #9aa0a6;
+            --background: #292a2d;
+            --card-bg: #35363a;
+            --accent: #ff8a65;
+            --success: #81c995;
+            --warning: #fdd663;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Additional color themes */
+        .theme-blue {
+            --primary: #1a73e8;
+            --primary-light: #e8f0fe;
+            --accent: #ff5722;
+        }
+
+        .theme-green {
+            --primary: #0f9d58;
+            --primary-light: #e6f4ea;
+            --accent: #4285f4;
+        }
+
+        .theme-purple {
+            --primary: #9c27b0;
+            --primary-light: #f3e5f5;
+            --accent: #ff9800;
+        }
+
+        .theme-red {
+            --primary: #d93025;
+            --primary-light: #fce8e6;
+            --accent: #1e8e3e;
+        }
+
+        .theme-orange {
+            --primary: #fa7b17;
+            --primary-light: #feefe6;
+            --accent: #1a73e8;
+        }
+
+        .theme-pink {
+            --primary: #ea80fc;
+            --primary-light: #fce4ec;
+            --accent: #00c853;
+        }
+
+        .theme-teal {
+            --primary: #009688;
+            --primary-light: #e0f2f1;
+            --accent: #ff5252;
+        }
+
+        .theme-indigo {
+            --primary: #3f51b5;
+            --primary-light: #e8eaf6;
+            --accent: #ffc107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 15px;
+            position: relative;
+        }
+
+        .theme-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        .theme-dropdown {
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 10px;
+            width: 180px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .theme-dropdown.show {
+            display: block;
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        .theme-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        .theme-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #3f93ff 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn-large {
+            padding: 14px 30px;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background-color: var(--primary-light);
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            background-color: var(--background);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--background);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .feature-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .feature-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Daily Routine Section */
+        .routine-container {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .routine-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .routine-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .routine-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .routine-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: var(--background);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px var(--shadow);
+            transition: var(--transition);
+        }
+
+        .routine-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .routine-time {
+            font-weight: bold;
+            color: var(--primary);
+            min-width: 100px;
+        }
+
+        .routine-activity {
+            flex-grow: 1;
+        }
+
+        .routine-check {
+            color: var(--success);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Community Section */
+        .community {
+            background-color: var(--secondary);
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background-color: var(--background);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .testimonial-text::before {
+            content: """;
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: var(--primary);
+            font-family: serif;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Forms */
+        .form-container {
+            max-width: 500px;
+            margin: 40px auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: var(--background);
+            color: var(--text);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+        }
+
+        /* Voice Assistant */
+        .voice-assistant {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .voice-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(26, 115, 232, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(26, 115, 232, 0);
+            }
+        }
+
+        .voice-btn.listening {
+            animation: rainbow 1.5s infinite, pulse 1s infinite;
+        }
+
+        @keyframes rainbow {
+            0% { background-color: #ff5252; }
+            14% { background-color: #ff9800; }
+            28% { background-color: #ffeb3b; }
+            42% { background-color: #4caf50; }
+            57% { background-color: #2196f3; }
+            71% { background-color: #3f51b5; }
+            85% { background-color: #9c27b0; }
+            100% { background-color: #e91e63; }
+        }
+
+        .voice-feedback {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 250px;
+            display: none;
+        }
+
+        .voice-feedback.show {
+            display: block;
+        }
+
+        .voice-status {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .voice-command {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .theme-dropdown {
+                right: -50px;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.5s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--background);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px var(--shadow);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <h1>VRUDHSAARTHI</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
+                        <li><a href="#routine"><i class="fas fa-calendar-alt"></i> Daily Routine</a></li>
+                        <li><a href="#community"><i class="fas fa-users"></i> Community</a></li>
+                        <li><a href="#resources"><i class="fas fa-book"></i> Resources</a></li>
+                        <li><a href="#login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> Login</button>
+                    <button class="btn btn-primary"><i class="fas fa-user-plus"></i> Register</button>
+                    <div class="theme-selector">
+                        <button class="theme-toggle" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <div class="theme-dropdown" id="themeDropdown">
+                            <div class="theme-option" data-theme="blue">
+                                <div class="theme-color" style="background-color: #1a73e8;"></div>
+                                <span>Blue Theme</span>
+                            </div>
+                            <div class="theme-option" data-theme="green">
+                                <div class="theme-color" style="background-color: #0f9d58;"></div>
+                                <span>Green Theme</span>
+                            </div>
+                            <div class="theme-option" data-theme="purple">
+                                <div class="theme-color" style="background-color: #9c27b0;"></div>
+                                <span>Purple Theme</span>
+                            </div>
+                            <div class="theme-option" data-theme="red">
+                                <div class="theme-color" style="background-color: #d93025;"></div>
+                                <span>Red Theme</span>
+                            </div>
+                            <div class="theme-option" data-theme="orange">
+                                <div class="theme-color" style="background-color: #fa7b17;"></div>
+                                <span>Orange Theme</span>
+                            </div>
+                            <div class="theme-option" data-theme="pink">
+                                <div class="theme-color" style="background-color: #ea80fc;"></div>
+                                <span>Pink Theme</span>
+                            </div>
+                            <div class="theme-option" data-theme="teal">
+                                <div class="theme-color" style="background-color: #009688;"></div>
+                                <span>Teal Theme</span>
+                            </div>
+                            <div class="theme-option" data-theme="indigo">
+                                <div class="theme-color" style="background-color: #3f51b5;"></div>
+                                <span>Indigo Theme</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h2>Empowering Seniors to Overcome Depression</h2>
+                <p>VRUDHSAARTHI is a compassionate companion designed to help elderly individuals find joy, purpose, and connection in their daily lives through personalized support and community engagement.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large"><i class="fas fa-play-circle"></i> Get Started</button>
+                    <button class="btn btn-outline btn-large"><i class="fas fa-info-circle"></i> Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card slide-in-left">
+                    <div class="stat-number" id="userCount">10,000+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="routineCount">95%</div>
+                    <div class="stat-label">Routine Completion</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="satisfactionRate">98%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat-card slide-in-right">
+                    <div class="stat-number" id="communityCount">5,000+</div>
+                    <div class="stat-label">Community Members</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features section" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Features</h2>
+                <p>Designed specifically to address the needs and challenges faced by elderly individuals</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Daily Routine</h3>
+                    <p>Structured daily activities to maintain purpose and consistency in everyday life with reminders and progress tracking.</p>
+                    <a href="#routine" class="feature-link">Explore routines <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-meditation"></i>
+                    </div>
+                    <h3>Mindfulness</h3>
+                    <p>Guided meditation and relaxation techniques to reduce stress and anxiety, tailored for seniors.</p>
+                    <a href="#" class="feature-link">Try meditation <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community</h3>
+                    <p>Connect with peers and share experiences in a supportive environment designed for meaningful interactions.</p>
+                    <a href="#community" class="feature-link">Join community <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Brain Games</h3>
+                    <p>Cognitive exercises to keep the mind sharp and improve mental agility with adaptive difficulty levels.</p>
+                    <a href="#" class="feature-link">Play games <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Health Tracking</h3>
+                    <p>Monitor mood patterns and health metrics to identify trends and improvements with visual reports.</p>
+                    <a href="#" class="feature-link">View tracking <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Support Network</h3>
+                    <p>Easy access to family support and professional help when needed with secure connection features.</p>
+                    <a href="#" class="feature-link">Get support <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Routine Section -->
+    <section class="section" id="routine">
+        <div class="container">
+            <div class="section-title">
+                <h2>Daily Routine</h2>
+                <p>A structured daily routine can provide stability and purpose</p>
+            </div>
+            <div class="routine-container">
+                <div class="routine-header">
+                    <h3>Today's Schedule</h3>
+                    <div class="routine-actions">
+                        <button class="btn btn-outline"><i class="fas fa-print"></i> Print</button>
+                        <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Activity</button>
+                    </div>
+                </div>
+                <div class="routine-list">
+                    <div class="routine-item">
+                        <div class="routine-time">7:00 AM</div>
+                        <div class="routine-activity">Morning Wake Up & Hydration - Start your day with a glass of water</div>
+                        <div class="routine-check"><i class="far fa-circle"></i></div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="routine-time">7:30 AM</div>
+                        <div class="routine-activity">Gentle Stretching & Breathing Exercises - 10 minutes of light activity</div>
+                        <div class="routine-check"><i class="far fa-circle"></i></div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="routine-time">8:30 AM</div>
+                        <div class="routine-activity">Healthy Breakfast - Balanced meal with proteins and fruits</div>
+                        <div class="routine-check"><i class="far fa-circle"></i></div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="routine-time">10:00 AM</div>
+                        <div class="routine-activity">Mindfulness Meditation - Guided session for mental clarity</div>
+                        <div class="routine-check"><i class="far fa-circle"></i></div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="routine-time">12:00 PM</div>
+                        <div class="routine-activity">Lunch & Social Time - Connect with family or friends during meal</div>
+                        <div class="routine-check"><i class="far fa-circle"></i></div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="routine-time">2:00 PM</div>
+                        <div class="routine-activity">Cognitive Games or Reading - Stimulate your mind with puzzles or books</div>
+                        <div class="routine-check"><i class="far fa-circle"></i></div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="routine-time">4:00 PM</div>
+                        <div class="routine-activity">Light Physical Activity - Short walk or gentle exercises</div>
+                        <div class="routine-check"><i class="far fa-circle"></i></div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="routine-time">6:30 PM</div>
+                        <div class="routine-activity">Dinner - Light, nutritious evening meal</div>
+                        <div class="routine-check"><i class="far fa-circle"></i></div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="routine-time">8:00 PM</div>
+                        <div class="routine-activity">Relaxation & Reflection - Journaling or quiet time</div>
+                        <div class="routine-check"><i class="far fa-circle"></i></div>
+                    </div>
+                    <div class="routine-item">
+                        <div class="routine-time">9:30 PM</div>
+                        <div class="routine-activity">Prepare for Bed - Wind down routine for better sleep</div>
+                        <div class="routine-check"><i class="far fa-circle"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community section" id="community">
+        <div class="container">
+            <div class="section-title">
+                <h2>Community Stories</h2>
+                <p>Hear from our members about their experiences with VRUDHSAARTHI</p>
+            </div>
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        VRUDHSAARTHI has transformed my daily life. The routine suggestions keep me engaged and the community support is wonderful.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div class="author-info">
+                            <h4>Ramesh Patel</h4>
+                            <p>Member since 2022</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        As a caregiver for my father, this platform has been a blessing. The voice assistance feature is particularly helpful for him.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">P</div>
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Caregiver</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        The mindfulness exercises have helped me manage my anxiety. I feel more connected and less lonely since joining.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">L</div>
+                        <div class="author-info">
+                            <h4>Lakshmi Iyer</h4>
+                            <p>Member since 2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Form -->
+    <section class="section" id="login">
+        <div class="container">
+            <div class="section-title">
+                <h2>Login to Your Account</h2>
+                <p>Access your personalized dashboard and continue your journey</p>
+            </div>
+            <div class="form-container">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="spinner" id="loginSpinner"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                <p style="text-align: center; margin-top: 20px;">
+                    Don't have an account? <a href="#" id="showRegister" style="color: var(--primary);">Register here</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voice Assistant -->
+    <div class="voice-assistant">
+        <div class="voice-feedback" id="voiceFeedback">
+            <div class="voice-status">Listening...</div>
+            <div class="voice-command" id="voiceCommand">Speak now</div>
+        </div>
+        <button class="voice-btn" id="voiceBtn">
+            <i class="fas fa-microphone"></i>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <p>VRUDHSAARTHI is dedicated to helping seniors overcome depression and find joy in their daily lives through technology-enabled support.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#routine">Daily Routine</a></li>
+                        <li><a href="#community">Community</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                        <li><a href="#login">Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Mental Health Guide</a></li>
+                        <li><a href="#">Exercise Videos</a></li>
+                        <li><a href="#">Meditation Library</a></li>
+                        <li><a href="#">Nutrition Tips</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +1 (800) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> support@vrudhsaarthi.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Wellness Ave, Care City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 VRUDHSAARTHI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeRegister">&times;</button>
+            <h2 style="margin-bottom: 20px;">Create an Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email Address</label>
+                    <input type="email" id="reg-email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" class="form-control" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" class="form-control" placeholder="Confirm your password" required>
+                </div>
+                <div class="form-group">
+                    <div class="spinner" id="registerSpinner"></div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const themeDropdown = document.getElementById('themeDropdown');
+        
+        themeToggle.addEventListener('click', () => {
+            themeDropdown.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!themeToggle.contains(e.target) && !themeDropdown.contains(e.target)) {
+                themeDropdown.classList.remove('show');
+            }
+        });
+
+        // Theme selection
+        const themeOptions = document.querySelectorAll('.theme-option');
+        themeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const theme = option.getAttribute('data-theme');
+                document.body.className = '';
+                document.body.classList.add(`theme-${theme}`);
+                themeDropdown.classList.remove('show');
+                
+                // Update theme icon
+                if (document.body.classList.contains('dark-theme')) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            });
+        });
+
+        // Dark/light theme toggle
+        themeToggle.addEventListener('dblclick', () => {
+            document.body.classList.toggle('dark-theme');
+            if (document.body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Voice Assistant Functionality
+        const voiceBtn = document.getElementById('voiceBtn');
+        const voiceIcon = voiceBtn.querySelector('i');
+        const voiceFeedback = document.getElementById('voiceFeedback');
+        const voiceCommand = document.getElementById('voiceCommand');
+        
+        // Voice commands database
+        const voiceCommands = {
+            'go to home': () => window.location.href = '#home',
+            'open home': () => window.location.href = '#home',
+            'go to features': () => window.location.href = '#features',
+            'open features': () => window.location.href = '#features',
+            'go to routine': () => window.location.href = '#routine',
+            'open routine': () => window.location.href = '#routine',
+            'go to community': () => window.location.href = '#community',
+            'open community': () => window.location.href = '#community',
+            'go to login': () => window.location.href = '#login',
+            'open login': () => window.location.href = '#login',
+            'change theme': () => document.body.classList.toggle('dark-theme'),
+            'toggle theme': () => document.body.classList.toggle('dark-theme'),
+            'light theme': () => document.body.classList.remove('dark-theme'),
+            'dark theme': () => document.body.classList.add('dark-theme'),
+            'need help': () => alert("I'm here to help! What do you need assistance with?"),
+            'what can you do': () => alert("I can help you navigate the website, change themes, and provide information about VRUDHSAARTHI."),
+            'how are you': () => alert("I'm doing well, thank you for asking! How are you feeling today?"),
+            'what time is it': () => {
+                const now = new Date();
+                alert(`The current time is ${now.toLocaleTimeString()}`);
+            },
+            'thank you': () => alert("You're welcome! Is there anything else I can help with?"),
+            'hello': () => alert("Hello! How can I assist you today?"),
+            'good morning': () => alert("Good morning! I hope you have a wonderful day ahead."),
+            'good afternoon': () => alert("Good afternoon! I hope you're having a pleasant day."),
+            'good evening': () => alert("Good evening! I hope you had a great day.")
+        };
+
+        voiceBtn.addEventListener('click', () => {
+            voiceBtn.classList.toggle('listening');
+            voiceFeedback.classList.toggle('show');
+            
+            if (voiceBtn.classList.contains('listening')) {
+                voiceIcon.classList.remove('fa-microphone');
+                voiceIcon.classList.add('fa-stop');
+                voiceCommand.textContent = "I'm listening...";
+                startVoiceRecognition();
+            } else {
+                voiceIcon.classList.remove('fa-stop');
+                voiceIcon.classList.add('fa-microphone');
+                voiceFeedback.classList.remove('show');
+                stopVoiceRecognition();
+            }
+        });
+
+        function startVoiceRecognition() {
+            // In a real implementation, this would connect to a speech recognition API
+            console.log("Voice recognition started");
+            
+            // Simulate listening with random command processing
+            const listeningInterval = setInterval(() => {
+                if (!voiceBtn.classList.contains('listening')) {
+                    clearInterval(listeningInterval);
+                    return;
+                }
+                
+                // Simulate receiving a command
+                const commands = Object.keys(voiceCommands);
+                const randomCommand = commands[Math.floor(Math.random() * commands.length)];
+                voiceCommand.textContent = `Heard: "${randomCommand}"`;
+                
+            }, 3000);
+            
+            // Store the interval ID to clear it later
+            voiceBtn.setAttribute('data-interval', listeningInterval);
+        }
+
+        function stopVoiceRecognition() {
+            console.log("Voice recognition stopped");
+            const intervalId = voiceBtn.getAttribute('data-interval');
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+            
+            // Process a random command when stopping (simulation)
+            const commands = Object.keys(voiceCommands);
+            const randomCommand = commands[Math.floor(Math.random() * commands.length)];
+            processVoiceCommand(randomCommand);
+        }
+
+        function processVoiceCommand(command) {
+            console.log("Processing command:", command);
+            
+            // Find the best match from our commands database
+            const normalizedCommand = command.toLowerCase().trim();
+            let bestMatch = null;
+            let maxSimilarity = 0;
+            
+            for (const cmd of Object.keys(voiceCommands)) {
+                const similarity = calculateSimilarity(normalizedCommand, cmd);
+                if (similarity > maxSimilarity && similarity > 0.5) {
+                    maxSimilarity = similarity;
+                    bestMatch = cmd;
+                }
+            }
+            
+            if (bestMatch) {
+                voiceCommands[bestMatch]();
+            } else {
+                alert(`I heard: "${command}". How can I help you with that?`);
+            }
+            
+            // Reset voice UI
+            setTimeout(() => {
+                voiceBtn.classList.remove('listening');
+                voiceIcon.classList.remove('fa-stop');
+                voiceIcon.classList.add('fa-microphone');
+                voiceFeedback.classList.remove('show');
+            }, 1000);
+        }
+
+        // Simple similarity calculation for voice commands
+        function calculateSimilarity(str1, str2) {
+            const words1 = str1.split(' ');
+            const words2 = str2.split(' ');
+            let matches = 0;
+            
+            for (const word1 of words1) {
+                for (const word2 of words2) {
+                    if (word1 === word2) {
+                        matches++;
+                        break;
+                    }
+                }
+            }
+            
+            return matches / Math.max(words1.length, words2.length);
+        }
+
+        // Routine Checkbox Toggle
+        const routineChecks = document.querySelectorAll('.routine-check');
+        routineChecks.forEach(check => {
+            check.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-circle')) {
+                    icon.classList.remove('fa-circle', 'far');
+                    icon.classList.add('fa-check-circle', 'fas');
+                    icon.style.color = 'var(--success)';
+                    
+                    // Add completion effect
+                    this.parentElement.style.opacity = '0.7';
+                    this.parentElement.style.textDecoration = 'line-through';
+                } else {
+                    icon.classList.remove('fa-check-circle', 'fas');
+                    icon.classList.add('fa-circle', 'far');
+                    icon.style.color = '';
+                    
+                    // Remove completion effect
+                    this.parentElement.style.opacity = '1';
+                    this.parentElement.style.textDecoration = 'none';
+                }
+            });
+        });
+
+        // Modal functionality
+        const registerModal = document.getElementById('registerModal');
+        const showRegister = document.getElementById('showRegister');
+        const closeRegister = document.getElementById('closeRegister');
+        
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.classList.add('show');
+        });
+        
+        closeRegister.addEventListener('click', () => {
+            registerModal.classList.remove('show');
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === registerModal) {
+                registerModal.classList.remove('show');
+            }
+        });
+
+        // Form Submissions
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const spinner = document.getElementById('loginSpinner');
+            
+            // Show loading spinner
+            spinner.style.display = 'block';
+            
+            // Simulate API call
+            try {
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                alert(`Login successful! Welcome back, ${email}`);
+            } catch (error) {
+                alert("Login failed. Please try again.");
+            } finally {
+                spinner.style.display = 'none';
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const fullname = document.getElementById('fullname').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const spinner = document.getElementById('registerSpinner');
+            
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+            
+            // Show loading spinner
+            spinner.style.display = 'block';
+            
+            // Simulate API call
+            try {
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                alert(`Registration successful! Welcome to VRUDHSAARTHI, ${fullname}`);
+                registerModal.classList.remove('show');
+            } catch (error) {
+                alert("Registration failed. Please try again.");
+            } finally {
+                spinner.style.display = 'none';
+            }
+        });
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .stat-card, .testimonial-card');
+            
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                
+                // If element is in viewport
+                if (position.top < window.innerHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize elements for animation
+        document.querySelectorAll('.feature-card, .stat-card, .testimonial-card').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        // Initial check
+        animateOnScroll();
+
+        // Update stats with animation
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start) + (id === 'userCount' || id === 'communityCount' ? '+' : '%');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Animate stats when they come into view
+        const statsSection = document.querySelector('.stats');
+        let statsAnimated = false;
+
+        function checkStatsAnimation() {
+            const position = statsSection.getBoundingClientRect();
+            
+            if (!statsAnimated && position.top < window.innerHeight - 100) {
+                animateValue('userCount', 0, 10000, 2000);
+                animateValue('routineCount', 0, 95, 2000);
+                animateValue('satisfactionRate', 0, 98, 2000);
+                animateValue('communityCount', 0, 5000, 2000);
+                statsAnimated = true;
+            }
+        }
+
+        window.addEventListener('scroll', checkStatsAnimation);
+        // Initial check
+        checkStatsAnimation();
+
+        // Add keyboard shortcut for voice assistant (V key)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'v' || e.key === 'V') {
+                voiceBtn.click();
+            }
+        });
+
+        // Enhanced routine items with tooltips
+        routineChecks.forEach(check => {
+            check.setAttribute('title', 'Click to mark as complete');
+        });
+
+        // Add current year to copyright
+        document.querySelector('.copyright p').innerHTML = `&copy; ${new Date().getFullYear()} VRUDHSAARTHI. All rights reserved.`;
+    </script>
+</body>
+</html>
